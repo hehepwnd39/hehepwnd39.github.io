@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <title>Lucrarea 1 - Information</title>
+</head>
+<body>
+    <nav>
+        <input type="checkbox" id="check">
+        <label for="check" class="check_btn" >
+           <p class="fa fa-bars"></p>  
+        </label>
+        <label class ="title">Welcome</label>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="pag1.html">Images</a></li>
+            <li><a href="pag2.html">Information</a></li>
+            <li><a href="pag3.html">Contact</a></li>
+        </ul>
+    </nav>
+    <h2>Please complete the fields with the required info!</h2>
+    <form class="form-style" action="pag3.html">
+    <div>
+        <label for="name">Username:</label>
+        <input type="text" name="name" id="name" placeholder="Enter username..." required>
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" placeholder="Enter email..." required>
+    </div>
+
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" placeholder="Enter password..." required>
+    </div>
+    <div>
+        <label for="age">Age:</label>
+        <input type="number" name="age" id="age" min="12">
+    </div>
+    <br>
+    <div>
+         <label>Choose gender</label>
+         <div>
+             <label for="male">Male</label>
+             <input type="radio" name="gender" id="male">
+         </div>
+         <div>
+            <label for="female">Female</label>
+            <input type="radio" name="gender" id="female">
+        </div>
+    </div>
+    <div>
+        <label for="biography">Biography</label style="padding: 0;">
+        <textarea placeholder="Say something about you..."></textarea>
+    </div>
+    <br>  
+    <br>
+    <hr>
+    <br>
+    <div class="button-customization">
+    <button type="submit">Submit your registration</button>
+    <button type="reset">Reset your fields</button>
+    </div>
+    
+    </form>
+</body>
+</html>
