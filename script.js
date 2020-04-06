@@ -69,19 +69,16 @@ window.addEventListener('mousemove',
                   if ( this.width < maxw && this.height < maxh) {
                         this.width += 2;
                         this.height += 2; }
-
                   }
 
                  else if (this.width > this.minw && this.height > this.minh ) {
                         this.width -= 1.5;
                         this.height -= 1.5;
-
                   }
-               
+            
                 this.draw();
             }
     }
-
     
     for (let i = 0; i < random_count_generated; i++) {
       
