@@ -90,8 +90,8 @@ window.addEventListener('mousemove',
     
     for (let i = 0; i < random_count_generated; i++) {
       
-      let dx = (Math.random() - 0.5);
-      let dy = (Math.random() - 0.5);
+      let dx = (Math.random() - 0.8);
+      let dy = (Math.random() - 0.8);
       let  rect_width = (Math.random() * 8) + 1;
       let  rect_height = rect_width;
       var x = Math.random() * (innerWidth - rect_width);
