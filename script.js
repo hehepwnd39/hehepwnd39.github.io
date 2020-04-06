@@ -10,22 +10,29 @@ let rectNumber = [];
 let random_count_generated = Math.floor(Math.random() * 800) + 700;
 let maxw = 115;
 let maxh = 115;
+let moved = 0;
+let code = 0;
+let generated_color;
+
+let touched_blue, touched_yellow, touched_red, touched_green, touched_black;
 
 
 let colorsList = ['blue','red','green','yellow','black'];
 
+
 window.addEventListener('mousemove',
-    (event) => {
-      x_pos = event.x;
-      y_pos = event.y;
+(event) => {
+  x_pos = event.x;
+  y_pos = event.y;
+  moved = moved + 1; 
+ })
 
-})
-
-window.addEventListener('resize',
+  window.addEventListener('resize',
     (event) => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    })
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  })
+
 
     class Rectangle {
             constructor(x,y,dx,dy,width,height) {
@@ -45,7 +52,10 @@ window.addEventListener('resize',
             draw = () => {
               c.fillStyle = this.color;
               c.fillRect(this.x,this.y,this.width,this.height);
-                   
+              c.font = "20px Arial";
+              c.strokeText("mousemove event count: "+moved, 10, 50);
+              c.strokeText("Last generated code: "+code+'('+generated_color+')', 10, 100);
+            
             }
 
             update = () => {
@@ -80,8 +90,8 @@ window.addEventListener('resize',
     
     for (let i = 0; i < random_count_generated; i++) {
       
-      let dx = (Math.random() - 0.4);
-      let dy = (Math.random() - 0.4);
+      let dx = (Math.random() - 0.5);
+      let dy = (Math.random() - 0.5);
       let  rect_width = (Math.random() * 8) + 1;
       let  rect_height = rect_width;
       var x = Math.random() * (innerWidth - rect_width);
@@ -89,17 +99,41 @@ window.addEventListener('resize',
 
       let new_rect = new Rectangle (x,y,dx,dy,rect_width,rect_height);
       rectNumber.push(new_rect);
-      
-
+    
     }
     
     function animate() {
             requestAnimationFrame(animate);
             c.clearRect(0,0,innerWidth,innerHeight);
 
-            for(let i = 0; i < rectNumber.length; i++){
+            for(let i = 0; i < rectNumber.length; i++)
+            {
+           
             rectNumber[i].update();     
-            }         
+            }       
+            
+            
+}
+
+if(rectNumber[rectNumber.length -1].color === 'blue'){
+  code = Math.floor(Math.random() * 200) +50; 
+  generated_color = 'blue';
+}
+else if(rectNumber[rectNumber.length -1].color === 'red'){
+  code = Math.floor(Math.random() * 400) +200; 
+  generated_color = 'red';
+}
+else if(rectNumber[rectNumber.length -1].color === 'green'){
+  code = Math.floor(Math.random() * 800) +600;
+  generated_color = 'green';
+}
+else if(rectNumber[rectNumber.length -1].color === 'yellow'){
+  code = Math.floor(Math.random() * (-50)) -200; 
+  generated_color = 'yellow';
+}
+else if(rectNumber[rectNumber.length -1].color === 'black'){
+  code = Math.floor(Math.random() * (-400)) -600; 
+  generated_color = 'black';
 }
 
 animate();
