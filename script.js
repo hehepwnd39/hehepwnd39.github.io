@@ -7,18 +7,13 @@ let c = canvas.getContext('2d');
 let x_pos;
 let y_pos;
 let rectNumber = [];
-let random_count_generated = Math.floor(Math.random() * 800) + 700;
+let random_count_generated = randomInt(1000,1200);
 let maxw = 115;
 let maxh = 115;
 let moved = 0;
 let code = 0;
 let generated_color;
-
-let touched_blue, touched_yellow, touched_red, touched_green, touched_black;
-
-
 let colorsList = ['blue','red','green','yellow','black'];
-
 
 window.addEventListener('mousemove',
 (event) => {
@@ -112,31 +107,35 @@ window.addEventListener('mousemove',
             rectNumber[i].update();     
             }       
             
-            
-}
-
-if(rectNumber[rectNumber.length -1].color === 'blue'){
-  code = Math.floor(Math.random() * 200) +50; 
-  generated_color = 'blue';
-}
-else if(rectNumber[rectNumber.length -1].color === 'red'){
-  code = Math.floor(Math.random() * 400) +200; 
-  generated_color = 'red';
-}
-else if(rectNumber[rectNumber.length -1].color === 'green'){
-  code = Math.floor(Math.random() * 800) +600;
-  generated_color = 'green';
-}
-else if(rectNumber[rectNumber.length -1].color === 'yellow'){
-  code = Math.floor(Math.random() * (-50)) -200; 
-  generated_color = 'yellow';
-}
-else if(rectNumber[rectNumber.length -1].color === 'black'){
-  code = Math.floor(Math.random() * (-400)) -600; 
-  generated_color = 'black';
 }
 
 animate();
+
+if(rectNumber[rectNumber.length -1].color === 'blue'){
+  code = randomInt(50, 200);
+  generated_color = 'blue';
+}
+else if(rectNumber[rectNumber.length -1].color === 'red'){
+  code = randomInt(201, 400);
+  generated_color = 'red';
+}
+else if(rectNumber[rectNumber.length -1].color === 'green'){
+  code = randomInt(401, 600);
+  generated_color = 'green';
+}
+else if(rectNumber[rectNumber.length -1].color === 'yellow'){
+  code = randomInt(-200, -50);
+  generated_color = 'yellow';
+}
+else if(rectNumber[rectNumber.length -1].color === 'black'){
+  code = randomInt(-600, -201);
+  generated_color = 'black';
+}
+
+
+function randomInt(min, max) { 
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
 
 
 // This is RGBA  changing every frame , unused for now
