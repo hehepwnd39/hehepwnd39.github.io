@@ -14,6 +14,7 @@ let moved = 0;
 let code = 0;
 let generated_color;
 let colorsList = ['blue','red','green','yellow','black'];
+let resultVal = "waiting...";
 
 window.addEventListener('mousemove',
 (event) => {
@@ -50,6 +51,7 @@ window.addEventListener('mousemove',
               c.font = "20px Arial";
               c.strokeText("mousemove event count: "+moved, 10, 50);
               c.strokeText("Last generated code: "+code+'('+generated_color+')', 10, 100);
+              c.strokeText("Random value from XML doc: "+resultVal, 1000, 50);
             
             }
 
@@ -78,6 +80,26 @@ window.addEventListener('mousemove',
             
                 this.draw();
             }
+
+            set_val = () => {
+
+                  let httpRequest;        
+            if(window.XMLHttpRequest){
+              httpRequest = new XMLHttpRequest();
+            }  else {
+              httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            
+            httpRequest.open("GET","http://davos.science.upm.ro/~traian/web_curs/ap_electric.php",false);
+            httpRequest.send(null);   
+
+            let xmlDoc = new DOMParser().parseFromString(httpRequest.response,"text/xml");
+            let xmlValue = xmlDoc.documentElement.childNodes[21].textContent;
+            resultVal = xmlValue;
+            console.log(xmlDoc); //xml
+            console.log(resultVal); //value
+          
+            }
     }
     
     for (let i = 0; i < random_count_generated; i++) {
@@ -95,44 +117,51 @@ window.addEventListener('mousemove',
     }
     
     function animate() {
-            requestAnimationFrame(animate);
-            c.clearRect(0,0,innerWidth,innerHeight);
+       requestAnimationFrame(animate);
+       c.clearRect(0,0,innerWidth,innerHeight);
 
             for(let i = 0; i < rectNumber.length; i++)
             {
-           
             rectNumber[i].update();     
-            }       
-            
+            }
+                             
 }
 
 animate();
 
-if(rectNumber[rectNumber.length -1].color === 'blue'){
+let last_square = rectNumber[rectNumber.length -1];
+
+if(last_square.color === 'blue'){
   code = randomInt(50, 200);
   generated_color = 'blue';
 }
-else if(rectNumber[rectNumber.length -1].color === 'red'){
+else if(last_square.color === 'red'){
   code = randomInt(201, 400);
   generated_color = 'red';
 }
-else if(rectNumber[rectNumber.length -1].color === 'green'){
+else if(last_square.color === 'green'){
   code = randomInt(401, 600);
   generated_color = 'green';
 }
-else if(rectNumber[rectNumber.length -1].color === 'yellow'){
+else if(last_square.color === 'yellow'){
   code = randomInt(-200, -50);
   generated_color = 'yellow';
 }
-else if(rectNumber[rectNumber.length -1].color === 'black'){
+else if(last_square.color === 'black'){
   code = randomInt(-600, -201);
   generated_color = 'black';
 }
 
 
-function randomInt(min, max) { 
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
+    function randomInt(min, max) { 
+        return Math.floor(Math.random() * (max - min + 1) + min);
+      }
+
+    setInterval( () => {          
+     last_square.set_val();
+    }       
+    ,1000);
+
 
 
 // This is RGBA  changing every frame , unused for now
@@ -142,3 +171,6 @@ function randomInt(min, max) {
     var blue_rnd = Math.round(Math.random() * 256);
     var alpha = Math.random() * (1 - 0.5) + 0.5;
     var color = 'rgba('+ red_rnd + ','+ green_rnd +','+ blue_rnd+','+ alpha +')';*/
+
+
+
